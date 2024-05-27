@@ -28,7 +28,7 @@ pub fn hash_password_tests() {
             |> expect.to_equal("v=19")
 
             params
-            |> expect.to_equal("m=19456,t=3,p=1")
+            |> expect.to_equal("m=19456,t=2,p=1")
 
             salt
             |> string.length

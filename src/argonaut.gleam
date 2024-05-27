@@ -21,7 +21,7 @@ pub opaque type Hasher {
 pub fn hasher() -> Hasher {
   Hasher(
     algorithm: Argon2id,
-    time_cost: 3,
+    time_cost: 2,
     memory_cost: 19 * 1024,
     parallelism: 1,
     hash_length: 32,
