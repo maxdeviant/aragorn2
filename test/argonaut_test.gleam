@@ -57,7 +57,7 @@ pub fn verify_password_tests() {
         argonaut.verify_password(
           argonaut.hasher(),
           candidate: candidate_password,
-          hashed: hashed_password,
+          hash: hashed_password,
         )
         |> expect.to_be_ok
       }),
@@ -72,7 +72,7 @@ pub fn verify_password_tests() {
           argonaut.verify_password(
             argonaut.hasher(),
             candidate: candidate_password,
-            hashed: hashed_password,
+            hash: hashed_password,
           )
           |> expect.to_be_error
         },
