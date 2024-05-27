@@ -1,5 +1,5 @@
 name = "aragorn2"
-version = "0.1.0"
+version = "0.0.1"
 description = "Secure password hashing, powered by Argon2"
 licenses = ["MIT"]
 repository = { type = "github", user = "maxdeviant", repo = "aragorn2" }
