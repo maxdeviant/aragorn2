@@ -1,3 +1,6 @@
+import gleam/dynamic.{type Dynamic}
+import gleam/result
+
 pub type Algorithm {
   Argon2d
   Argon2i
@@ -14,6 +17,7 @@ pub opaque type Hasher {
   )
 }
 
+/// Returns the default `Hasher`.
 pub fn hasher() -> Hasher {
   Hasher(
     algorithm: Argon2id,
@@ -26,7 +30,25 @@ pub fn hasher() -> Hasher {
 
 pub fn hash_password(hasher: Hasher, password: BitArray) -> Result(String, Nil) {
   do_hash_password(hasher, password)
+  |> result.nil_error
 }
 
 @external(erlang, "argonaut_ffi", "hash_password")
-fn do_hash_password(hash: Hasher, password: BitArray) -> Result(String, Nil)
+fn do_hash_password(hash: Hasher, password: BitArray) -> Result(String, Dynamic)
+
+pub fn verify_password(
+  hasher: Hasher,
+  candidate candidate_password: BitArray,
+  hashed hashed_password: BitArray,
+) -> Result(Nil, Nil) {
+  do_verify_password(hasher, candidate_password, hashed_password)
+  |> result.map(fn(_) { Nil })
+  |> result.nil_error
+}
+
+@external(erlang, "argonaut_ffi", "verify_password")
+fn do_verify_password(
+  hash: Hasher,
+  candidate_password: BitArray,
+  hashed_password: BitArray,
+) -> Result(Dynamic, Dynamic)
