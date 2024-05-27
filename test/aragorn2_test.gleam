@@ -1,4 +1,4 @@
-import argonaut
+import aragorn2
 import gleam/string
 import startest.{describe, it}
 import startest/expect
@@ -8,11 +8,11 @@ pub fn main() {
 }
 
 pub fn hash_password_tests() {
-  describe("argonaut", [
+  describe("aragorn2", [
     describe("hash_password", [
       it("hashes the provided password", fn() {
         let hashed_password =
-          argonaut.hash_password(argonaut.hasher(), <<"ilovegleam":utf8>>)
+          aragorn2.hash_password(aragorn2.hasher(), <<"ilovegleam":utf8>>)
           |> expect.to_be_ok
 
         let components =
@@ -46,7 +46,7 @@ pub fn hash_password_tests() {
 }
 
 pub fn verify_password_tests() {
-  describe("argonaut", [
+  describe("aragorn2", [
     describe("verify_password", [
       it("accepts a candidate password that matches the hashed password", fn() {
         let candidate_password = <<"very good password":utf8>>
@@ -54,8 +54,8 @@ pub fn verify_password_tests() {
           "$argon2id$v=19$m=19456,t=3,p=1$ZYCzcZSdMx22PjYmDQJshw$+9l+TA6qymw31yLAuvOQV0niFc81i/48v/HSUhT0MhY":utf8,
         >>
 
-        argonaut.verify_password(
-          argonaut.hasher(),
+        aragorn2.verify_password(
+          aragorn2.hasher(),
           candidate: candidate_password,
           hash: hashed_password,
         )
@@ -69,8 +69,8 @@ pub fn verify_password_tests() {
             "$argon2id$v=19$m=19456,t=3,p=1$ZYCzcZSdMx22PjYmDQJshw$+9l+TA6qymw31yLAuvOQV0niFc81i/48v/HSUhT0MhY":utf8,
           >>
 
-          argonaut.verify_password(
-            argonaut.hasher(),
+          aragorn2.verify_password(
+            aragorn2.hasher(),
             candidate: candidate_password,
             hash: hashed_password,
           )

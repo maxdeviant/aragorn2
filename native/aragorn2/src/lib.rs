@@ -10,7 +10,7 @@ mod atoms {
     }
 }
 
-rustler::init!("argonaut_ffi", [hash_password, verify_password]);
+rustler::init!("aragorn2_ffi", [hash_password, verify_password]);
 
 #[derive(NifUnitEnum, Clone, Copy)]
 enum Algorithm {

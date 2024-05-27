@@ -1,8 +1,8 @@
 #
-# Argonaut
+# Aragorn2
 #
 
-priv/argonaut/*.so
+priv/aragorn2/*.so
 
 #
 # Gleam

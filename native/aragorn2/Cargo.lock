@@ -12,6 +12,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "aragorn2_ffi"
+version = "0.1.0"
+dependencies = [
+ "argon2",
+ "rand_core",
+ "rustler",
+]
+
+[[package]]
 name = "argon2"
 version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -21,15 +30,6 @@ dependencies = [
  "blake2",
  "cpufeatures",
  "password-hash",
-]
-
-[[package]]
-name = "argonaut_ffi"
-version = "0.1.0"
-dependencies = [
- "argon2",
- "rand_core",
- "rustler",
 ]
 
 [[package]]

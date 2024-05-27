@@ -1,3 +1,3 @@
 build-nif:
-    (cd native/argonaut && cargo build --release)
-    cp native/argonaut/target/release/libargonaut_ffi.dylib ./priv/argonaut/libargonaut_ffi.so
+    (cd native/aragorn2 && cargo build --release)
+    cp native/aragorn2/target/release/libaragorn2_ffi.dylib ./priv/aragorn2/libaragorn2_ffi.so

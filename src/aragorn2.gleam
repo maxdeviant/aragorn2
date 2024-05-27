@@ -1,4 +1,4 @@
-//// Argonaut provides secure password hashing, powered by Argon2.
+//// Aragorn2 provides secure password hashing, powered by Argon2.
 ////
 //// From the [Argon2 repo](https://github.com/P-H-C/phc-winner-argon2):
 ////
@@ -106,7 +106,7 @@ pub fn hash_password(hasher: Hasher, password: BitArray) -> Result(String, Nil) 
   |> result.nil_error
 }
 
-@external(erlang, "argonaut_ffi", "hash_password")
+@external(erlang, "aragorn2_ffi", "hash_password")
 fn do_hash_password(hash: Hasher, password: BitArray) -> Result(String, Dynamic)
 
 /// Returns whether the candidate password matches the given hashed password.
@@ -120,7 +120,7 @@ pub fn verify_password(
   |> result.nil_error
 }
 
-@external(erlang, "argonaut_ffi", "verify_password")
+@external(erlang, "aragorn2_ffi", "verify_password")
 fn do_verify_password(
   hash: Hasher,
   candidate_password: BitArray,

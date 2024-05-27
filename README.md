@@ -1,20 +1,21 @@
-# argonaut
+# aragorn2
 
-[![Package Version](https://img.shields.io/hexpm/v/argonaut)](https://hex.pm/packages/argonaut)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/argonaut/)
+[![Package Version](https://img.shields.io/hexpm/v/aragorn2)](https://hex.pm/packages/aragorn2)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/aragorn2/)
 
 ```sh
-gleam add argonaut
+gleam add aragorn2
 ```
+
 ```gleam
-import argonaut
+import aragorn2
 
 pub fn main() {
   // TODO: An example of the project in use
 }
 ```
 
-Further documentation can be found at <https://hexdocs.pm/argonaut>.
+Further documentation can be found at <https://hexdocs.pm/aragorn2>.
 
 ## Development
 
