@@ -1,7 +1,7 @@
 use argon2::password_hash::{PasswordHasher, SaltString};
 use argon2::{Argon2, ParamsBuilder, Version};
 use rand_core::OsRng;
-use rustler::{Encoder, Env, NifResult, NifStruct, NifUnitEnum, Term};
+use rustler::{Encoder, Env, NifRecord, NifResult, NifUnitEnum, Term};
 
 mod atoms {
     rustler::atoms! {
@@ -29,8 +29,8 @@ impl From<Algorithm> for argon2::Algorithm {
     }
 }
 
-#[derive(NifStruct)]
-#[module = "argonaut_ffi.Hasher"]
+#[derive(NifRecord)]
+#[tag = "hasher"]
 struct Hasher {
     algorithm: Algorithm,
     time_cost: u32,
@@ -40,7 +40,7 @@ struct Hasher {
 }
 
 #[rustler::nif(schedule = "DirtyCpu")]
-fn hash_password<'a>(env: Env<'a>, hasher: Hasher, password: Vec<u8>) -> NifResult<Term<'a>> {
+fn hash_password<'a>(env: Env<'a>, hasher: Hasher, password: &str) -> NifResult<Term<'a>> {
     let salt = SaltString::generate(&mut OsRng);
     do_hash_password(hasher, password, salt).to_nif_result(env)
 }
@@ -49,7 +49,7 @@ fn hash_password<'a>(env: Env<'a>, hasher: Hasher, password: Vec<u8>) -> NifResu
 fn hash_password_with_salt<'a>(
     env: Env<'a>,
     hasher: Hasher,
-    password: Vec<u8>,
+    password: &str,
     salt: &str,
 ) -> NifResult<Term<'a>> {
     let salt = match SaltString::from_b64(salt) {
@@ -61,7 +61,7 @@ fn hash_password_with_salt<'a>(
 
 fn do_hash_password(
     hasher: Hasher,
-    password: Vec<u8>,
+    password: &str,
     salt: SaltString,
 ) -> Result<String, argon2::password_hash::Error> {
     let params = ParamsBuilder::new()
@@ -73,7 +73,7 @@ fn do_hash_password(
 
     let argon2 = Argon2::new(hasher.algorithm.into(), Version::V0x13, params);
 
-    let password_hash = argon2.hash_password(&password, &salt)?;
+    let password_hash = argon2.hash_password(&password.as_bytes(), &salt)?;
     Ok(password_hash.to_string())
 }
 

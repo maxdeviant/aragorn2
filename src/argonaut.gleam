@@ -1,5 +1,3 @@
-import gleam/io
-
 pub type Algorithm {
   Argon2d
   Argon2i
@@ -20,8 +18,8 @@ pub fn hasher() -> Hasher {
   Hasher(
     algorithm: Argon2id,
     time_cost: 3,
-    memory_cost: 16,
-    parallelism: 4,
+    memory_cost: 19 * 1024,
+    parallelism: 1,
     hash_length: 32,
   )
 }
