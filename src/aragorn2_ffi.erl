@@ -6,7 +6,10 @@
 -on_load(init/0).
 
 init() ->
-    ok = erlang:load_nif("./priv/aragorn2/libaragorn2_ffi", 0).
+    ok = erlang:load_nif(nif_filepath(), 0).
+
+nif_filepath() ->
+    filename:join([code:priv_dir("aragorn2"), "lib", "aragorn2_ffi"]).
 
 hash_password(_Hasher, _Password) ->
     erlang:nif_error(nif_library_not_loaded).
