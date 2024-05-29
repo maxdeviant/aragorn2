@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.5.1
+      - uses: extractions/setup-just@v2
       - uses: erlef/setup-beam@v1.15.4
         with:
           otp-version: "26.0.2"
           gleam-version: "1.1.0"
           rebar3-version: "3"
+      - uses: dtolnay/rust-toolchain@stable
       - run: gleam format --check src test
       - run: gleam deps download
-      # TODO: Get NIFs building in CI.
-      # - run: gleam test --target erlang
+      - run: just build-nif
+      - run: gleam test --target erlang
