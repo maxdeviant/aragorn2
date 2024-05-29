@@ -20,5 +20,5 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - run: gleam format --check src test
       - run: gleam deps download
-      - run: just build-nif
+      - run: cargo xtask
       - run: gleam test --target erlang
