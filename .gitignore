@@ -12,3 +12,9 @@ priv/lib/*.so
 *.ez
 /build
 erl_crash.dump
+
+#
+# Rust
+#
+
+target/
