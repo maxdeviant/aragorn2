@@ -12,6 +12,7 @@ nif_filepath() ->
     DllName = case {os(), arch()} of
         {macos, aarch64} -> "aragorn2_ffi-macos-aarch64";
         {linux, x86_64} -> "aragorn2_ffi-linux-x86_64";
+        {windows, x86_64} -> "aragorn2_ffi-windows-x86_64";
         {Os, Arch} -> throw({dll_not_found, ["Unsupported platform", Os, Arch]})
     end,
     filename:join([code:priv_dir("aragorn2"), "lib", DllName]).
@@ -29,6 +30,7 @@ arch() ->
     case string:split(SystemArchitecture, "-") of
         ["x86_64", _] -> x86_64;
         ["aarch64", _] -> aarch64;
+        ["win32"] -> x86_64;
         Other -> {other, Other}
     end.
 

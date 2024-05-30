@@ -29,7 +29,7 @@ fn main() -> Result<()> {
     dll_input_path.set_extension(DLL_EXTENSION);
 
     let mut dll_output_path = priv_lib_dir.join(format!("aragorn2_ffi-{OS}-{ARCH}"));
-    dll_output_path.set_extension("so");
+    dll_output_path.set_extension(if cfg!(windows) { "dll" } else { "so" });
 
     fs::create_dir_all(&priv_lib_dir)?;
     fs::copy(&dll_input_path, &dll_output_path)?;

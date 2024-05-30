@@ -10,12 +10,14 @@ jobs:
   compile-nifs:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
             target: linux-x86_64
           - os: macos-latest
             target: macos-aarch64
+          - os: windows-latest
+            target: windows-x86_64
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4.1.6
@@ -25,9 +27,17 @@ jobs:
       - uses: actions/upload-artifact@v4.3.3
         with:
           name: compiled-nifs-${{ matrix.target }}
-          path: priv/lib/*.so
+          path: priv/lib/*
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            target: linux-x86_64
+          - os: windows-latest
+            target: windows-x86_64
+    runs-on: ${{ matrix.os }}
     needs: compile-nifs
     steps:
       - uses: actions/checkout@v4.1.6
@@ -37,9 +47,10 @@ jobs:
           gleam-version: "1.1.0"
           rebar3-version: "3"
       - run: gleam format --check src test
+        if: ${{ matrix.os != 'windows-latest' }}
       - run: gleam deps download
       - uses: actions/download-artifact@v4.1.7
         with:
-          name: compiled-nifs-linux-x86_64
+          name: compiled-nifs-${{ matrix.target }}
           path: priv/lib
       - run: gleam test --target erlang
