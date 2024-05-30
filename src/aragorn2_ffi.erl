@@ -26,8 +26,9 @@ os() ->
 arch() ->
     SystemArchitecture = erlang:system_info(system_architecture),
     case string:split(SystemArchitecture, "-") of
+        ["x86_64", _] -> x86_64;
         ["aarch64", _] -> aarch64;
-        Other -> {other, atom_to_binary(Other, utf8)}
+        Other -> {other, Other}
     end.
 
 hash_password(_Hasher, _Password) ->
