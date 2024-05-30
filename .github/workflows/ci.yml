@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.6
       - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2.7.3
+      - uses: swatinem/rust-cache@v2.7.3
       - run: cargo xtask
       - uses: actions/upload-artifact@v4.3.3
         with:
