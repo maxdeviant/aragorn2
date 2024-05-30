@@ -21,3 +21,7 @@ jobs:
       - run: gleam deps download
       - run: cargo xtask
       - run: gleam test --target erlang
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compiled-nifs
+          path: priv/lib/*.so
