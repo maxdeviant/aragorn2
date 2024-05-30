@@ -12,11 +12,11 @@ Secure password hashing, powered by Argon2.
 
 Precompiled binaries are available for the following platforms for your convenience:
 
-| OS      | Architecture |
-| ------- | ------------ |
-| Linux   | x86_64       |
-| macOS   | aarch64      |
-| Windows | x86_64       |
+| OS      | Architecture (s) |
+| ------- | ---------------- |
+| Linux   | x86_64           |
+| macOS   | aarch64, x86_64  |
+| Windows | x86_64           |
 
 ## Installation
 

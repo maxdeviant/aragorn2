@@ -9,7 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added support for Linux (x86_64) and Windows (x86_64).
+- Added support for:
+  - Linux (x86_64)
+  - macOS (x86_64)
+  - Windows (x86_64)
 
 ## [0.0.2] - 2025-05-28
 
