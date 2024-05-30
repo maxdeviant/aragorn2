@@ -1,4 +1,4 @@
-use std::env::consts::{DLL_EXTENSION, DLL_PREFIX};
+use std::env::consts::{ARCH, DLL_EXTENSION, DLL_PREFIX, OS};
 use std::fs;
 use std::path::PathBuf;
 use std::process::Command;
@@ -28,7 +28,7 @@ fn main() -> Result<()> {
         PathBuf::from_iter(["target", "release"]).join(format!("{DLL_PREFIX}aragorn2_ffi"));
     dll_input_path.set_extension(DLL_EXTENSION);
 
-    let mut dll_output_path = priv_lib_dir.join(format!("aragorn2_ffi"));
+    let mut dll_output_path = priv_lib_dir.join(format!("aragorn2_ffi-{OS}-{ARCH}"));
     dll_output_path.set_extension("so");
 
     fs::create_dir_all(&priv_lib_dir)?;
