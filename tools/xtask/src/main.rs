@@ -6,6 +6,8 @@ use std::process::Command;
 use anyhow::{bail, Context, Result};
 
 fn main() -> Result<()> {
+    env_logger::init();
+
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".to_string());
 
     let mut build_command = Command::new(&cargo);
