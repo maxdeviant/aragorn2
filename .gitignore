@@ -2,7 +2,8 @@
 # Aragorn2
 #
 
-priv/lib/*.{so,dll}
+priv/lib/*.so
+priv/lib/*.dll
 
 #
 # Gleam
@@ -18,3 +19,9 @@ erl_crash.dump
 #
 
 target/
+
+#
+# macOS
+#
+
+.DS_Store
