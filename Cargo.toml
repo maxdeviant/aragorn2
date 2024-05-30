@@ -4,3 +4,4 @@ members = ["native/aragorn2", "tools/xtask"]
 
 [workspace.dependencies]
 anyhow = "1.0"
+log = "0.4"

@@ -32,6 +32,11 @@ fn main() -> Result<()> {
     dll_output_path.set_extension(if cfg!(windows) { "dll" } else { "so" });
 
     fs::create_dir_all(&priv_lib_dir)?;
+    log::info!(
+        "Copying {input} to {output}",
+        input = dll_input_path.display(),
+        output = dll_output_path.display()
+    );
     fs::copy(&dll_input_path, &dll_output_path)?;
 
     Ok(())
