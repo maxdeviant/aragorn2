@@ -2,7 +2,7 @@
 # Aragorn2
 #
 
-priv/lib/*.so
+priv/lib/*.{so,dll}
 
 #
 # Gleam
