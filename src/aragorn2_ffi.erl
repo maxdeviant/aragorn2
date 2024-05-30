@@ -11,6 +11,7 @@ init() ->
 nif_filepath() ->
     DllName = case {os(), arch()} of
         {macos, aarch64} -> "aragorn2_ffi-macos-aarch64";
+        {linux, x86_64} -> "aragorn2_ffi-linux-x86_64";
         {Os, Arch} -> throw({dll_not_found, ["Unsupported platform", Os, Arch]})
     end,
     filename:join([code:priv_dir("aragorn2"), "lib", DllName]).
