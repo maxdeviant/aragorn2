@@ -11,6 +11,7 @@ init() ->
 nif_filepath() ->
     DllName = case {os(), arch()} of
         {macos, aarch64} -> "aragorn2_ffi-macos-aarch64";
+        {macos, x86_64} -> "aragorn2_ffi-macos-x86_64";
         {linux, x86_64} -> "aragorn2_ffi-linux-x86_64";
         {windows, x86_64} -> "aragorn2_ffi-windows-x86_64";
         {Os, Arch} -> throw({dll_not_found, ["Unsupported platform", Os, Arch]})
