@@ -11,6 +11,11 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            target: linux-x86_64
+          - os: macos-latest
+            target: macos-aarch64
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4.1.6
@@ -19,7 +24,7 @@ jobs:
       - run: cargo xtask
       - uses: actions/upload-artifact@v4.3.3
         with:
-          name: compiled-nifs
+          name: compiled-nifs-${{ matrix.target }}
           path: priv/lib/*.so
   test:
     runs-on: ubuntu-latest
@@ -35,6 +40,6 @@ jobs:
       - run: gleam deps download
       - uses: actions/download-artifact@v4.1.7
         with:
-          name: compiled-nifs
+          name: compiled-nifs-linux-x86_64
           path: priv/lib
       - run: gleam test --target erlang
