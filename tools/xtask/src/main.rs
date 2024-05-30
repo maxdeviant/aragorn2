@@ -4,8 +4,11 @@ use std::path::PathBuf;
 use std::process::Command;
 
 use anyhow::{bail, Context, Result};
+use env_logger::Env;
 
 fn main() -> Result<()> {
+    env_logger::init_from_env(Env::default().default_filter_or("info"));
+
     let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".to_string());
 
     let mut build_command = Command::new(&cargo);
@@ -32,6 +35,11 @@ fn main() -> Result<()> {
     dll_output_path.set_extension(if cfg!(windows) { "dll" } else { "so" });
 
     fs::create_dir_all(&priv_lib_dir)?;
+    log::info!(
+        "Copying {input} to {output}",
+        input = dll_input_path.display(),
+        output = dll_output_path.display()
+    );
     fs::copy(&dll_input_path, &dll_output_path)?;
 
     Ok(())
