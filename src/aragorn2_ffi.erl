@@ -27,10 +27,10 @@ os() ->
 
 arch() ->
     SystemArchitecture = erlang:system_info(system_architecture),
-    io:format("~p\n", [SystemArchitecture]),
     case string:split(SystemArchitecture, "-") of
         ["x86_64", _] -> x86_64;
         ["aarch64", _] -> aarch64;
+        ["win32"] -> x86_64;
         Other -> {other, Other}
     end.
 
