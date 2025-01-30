@@ -103,7 +103,7 @@ pub fn with_hash_length(hasher: Hasher, hash_length: Int) -> Hasher {
 /// Returns the hash of the given password.
 pub fn hash_password(hasher: Hasher, password: BitArray) -> Result(String, Nil) {
   do_hash_password(hasher, password)
-  |> result.nil_error
+  |> result.replace_error(Nil)
 }
 
 @external(erlang, "aragorn2_ffi", "hash_password")
@@ -117,7 +117,7 @@ pub fn verify_password(
 ) -> Result(Nil, Nil) {
   do_verify_password(hasher, candidate_password, hashed_password)
   |> result.map(fn(_) { Nil })
-  |> result.nil_error
+  |> result.replace_error(Nil)
 }
 
 @external(erlang, "aragorn2_ffi", "verify_password")
